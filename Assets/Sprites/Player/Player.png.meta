@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: cdcef58b55429ab49b40af4359b28f6a
+guid: 9bc025b1eb444154083d35ef8586e7d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8353298963374199304
-    second: PlayerRifle (1)_0
+      213: 3784468143690658118
+    second: survivor character v4.2 spritesheet_0
+  - first:
+      213: 1018718022657591525
+    second: survivor character v4.2 spritesheet_1
+  - first:
+      213: -5971943218594576028
+    second: survivor character v4.2 spritesheet_2
+  - first:
+      213: -5119185361134956257
+    second: survivor character v4.2 spritesheet_3
+  - first:
+      213: -1077593241417210064
+    second: survivor character v4.2 spritesheet_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +58,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 92
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -152,23 +164,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerRifle (1)_0
+      name: survivor character v4.2 spritesheet_0
       rect:
         serializedVersion: 2
-        x: 86
-        y: 41
-        width: 196
-        height: 455
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 802de864621ece370800000000000000
-      internalID: 8353298963374199304
+      spriteID: 641b678c9b1258430800000000000000
+      internalID: 3784468143690658118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: survivor character v4.2 spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e84bcae4a6332e00800000000000000
+      internalID: 1018718022657591525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: survivor character v4.2 spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4690edc88456f1da0800000000000000
+      internalID: -5971943218594576028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: survivor character v4.2 spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f11db22690005f8b0800000000000000
+      internalID: -5119185361134956257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: survivor character v4.2 spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03727f008ae9b01f0800000000000000
+      internalID: -1077593241417210064
       vertices: []
       indices: 
       edges: []
@@ -177,7 +277,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: d56a30d0d68a2f4439d683f45a24754c
     internalID: 0
     vertices: []
     indices: 
@@ -185,9 +285,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.3499999940395355},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      PlayerRifle (1)_0: 8353298963374199304
+      survivor character v4.2 spritesheet_0: 3784468143690658118
+      survivor character v4.2 spritesheet_1: 1018718022657591525
+      survivor character v4.2 spritesheet_2: -5971943218594576028
+      survivor character v4.2 spritesheet_3: -5119185361134956257
+      survivor character v4.2 spritesheet_4: -1077593241417210064
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

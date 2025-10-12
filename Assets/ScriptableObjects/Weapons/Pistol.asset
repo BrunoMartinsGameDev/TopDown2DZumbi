@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Pistol
   damage: 8
-  fireRate: 0.4
+  fireRate: 0.2
   magazineSize: 6
   reloadTime: 0.2
   infiniteAmmo: 1
