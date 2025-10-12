@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Rifle
-  damage: 30
-  fireRate: 0.1
+  damage: 60
+  fireRate: 0.5
   magazineSize: 20
   reloadTime: 0.5
   infiniteAmmo: 0
