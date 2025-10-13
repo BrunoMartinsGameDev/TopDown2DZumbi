@@ -20,3 +20,6 @@ MonoBehaviour:
   infiniteAmmo: 1
   startExtraMagazines: 0
   bulletPrefab: {fileID: 4941084398183224882, guid: 72979478118b06b4aa276a54932705f5, type: 3}
+  shootSound: {fileID: 8300000, guid: 021fae125d463f3419e0c67e88105a86, type: 3}
+  reloadSound: {fileID: 8300000, guid: 64f54e0e6c3280b4abbbfd9d0b21d512, type: 3}
+  recoilIntensity: 0.1

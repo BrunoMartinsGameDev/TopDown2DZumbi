@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(AudioSource))]
 public class EnemyStats : MonoBehaviour, IShottable
 {
     public EnemyStatsData statsData;
+    public AudioClip idleSound;
     public UnityEvent onDeath;
     private int _currentHealth = 100;
+    private AudioSource audioSource;
     public int CurrentHealth {
         get{ return _currentHealth; }
         set{
@@ -14,6 +17,7 @@ public class EnemyStats : MonoBehaviour, IShottable
                 // Lógica para quando o inimigo morre
                 Debug.Log($"{gameObject.name} died.");
                 ChangeSprite(statsData != null ? statsData.deathSprite : null);
+                audioSource.Stop();
                 onDeath?.Invoke();
             }
             _currentHealth = value;
@@ -25,6 +29,15 @@ public class EnemyStats : MonoBehaviour, IShottable
             CurrentHealth = Mathf.RoundToInt(statsData.maxHealth);
         else
             CurrentHealth = 100; // Valor padrão se statsData não estiver definido
+        audioSource = GetComponent<AudioSource>();
+        if (idleSound != null && audioSource != null)
+        {
+            audioSource.clip = idleSound;
+            audioSource.loop = true;
+            audioSource.Play();
+            audioSource.volume = 0.5f;
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+        }
     }
 
     public void GetShot(float damage)

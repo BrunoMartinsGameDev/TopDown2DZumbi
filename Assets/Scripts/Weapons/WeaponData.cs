@@ -11,4 +11,7 @@ public class WeaponData : ScriptableObject
     public bool infiniteAmmo = true;
     public int startExtraMagazines = 0;
     public GameObject bulletPrefab;
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
+    public float recoilIntensity = 0.1f;
 }

@@ -1,20 +1,24 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour
 {
     [Header("Weapon Data")]
     public WeaponData weaponData;
     public Transform firePoint;
+    public GameObject muzzleFlashPrefab;
 
     private int currentMagazine;
     private int currentExtraMagazines;
     private float nextFireTime = 0f;
     private bool isReloading = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        
         currentMagazine = weaponData.magazineSize;
         currentExtraMagazines = weaponData.infiniteAmmo ? int.MaxValue : weaponData.startExtraMagazines;
     }
@@ -57,7 +61,11 @@ public class Weapon : MonoBehaviour
             }
         }
         currentMagazine--;
-        // Adicione efeitos, som, etc.
+
+        GameObject flash = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation, firePoint);
+        Destroy(flash, 0.1f); // Destroi o efeito de flash
+        audioSource.PlayOneShot(weaponData.shootSound);
+        CameraFollow.Instance.Shake(weaponData.recoilIntensity, 0.1f);
     }
 
     void TryReload()
@@ -77,6 +85,7 @@ public class Weapon : MonoBehaviour
     System.Collections.IEnumerator Reload(int magazineSize)
     {
         isReloading = true;
+        audioSource.PlayOneShot(weaponData.reloadSound);
         yield return new WaitForSeconds(weaponData.reloadTime);
         int bulletsToReload = magazineSize - currentMagazine;
         if (weaponData.infiniteAmmo)
