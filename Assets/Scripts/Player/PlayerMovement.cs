@@ -2,11 +2,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
-    
+
+    [Header("Sprite Settings")]
+    private SpriteRenderer spriteRenderer;
+    public Sprite pistolSprite;
+    public Sprite rifleSprite;
+
     [Header("Components")]
     private Rigidbody2D rb2D;
     private Camera mainCamera;
@@ -22,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         rb2D.gravityScale = 0f; // Garantir que não há gravidade
         mainCamera = Camera.main;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("PlayerMovement: SpriteRenderer component not found!");
+        }
 
         // Garantir que existe um Rigidbody2D
         if (rb2D == null)
@@ -67,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movement = moveInput * moveSpeed;
         rb2D.linearVelocity = movement;
     }
-    
+
     private void HandleLook()
     {
         if (mainCamera == null) return;
@@ -89,6 +100,24 @@ public class PlayerMovement : MonoBehaviour
         {
             float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+        }
+    }
+    
+    public void UpdateWeaponSprite(WeaponData weaponData)
+    {
+        if (spriteRenderer == null) return;
+
+        switch (weaponData.weaponName)
+        {
+            case "Pistol":
+                spriteRenderer.sprite = pistolSprite;
+                break;
+            case "Rifle":
+                spriteRenderer.sprite = rifleSprite;
+                break;
+            default:
+                Debug.LogWarning("PlayerMovement: Unknown weapon type for sprite update.");
+                break;
         }
     }
     

@@ -47,5 +47,9 @@ public class PlayerInputGeneral : MonoBehaviour
     {
         weapon.OnReload(value.isPressed);
     }
+    public void OnChangeWeapon(InputValue value)
+    {
+        weapon.OnChangeWeapon(value.isPressed);
+    }
     #endregion
 }

@@ -12,6 +12,7 @@ public class EnemyStats : MonoBehaviour, IShottable
     public int CurrentHealth {
         get{ return _currentHealth; }
         set{
+            _currentHealth = value;
             if(_currentHealth <= 0)
             {
                 // Lógica para quando o inimigo morre
@@ -20,7 +21,6 @@ public class EnemyStats : MonoBehaviour, IShottable
                 audioSource.Stop();
                 onDeath?.Invoke();
             }
-            _currentHealth = value;
         } }
 
     void Start()

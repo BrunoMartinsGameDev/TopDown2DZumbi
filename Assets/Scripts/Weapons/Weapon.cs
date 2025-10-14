@@ -4,7 +4,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("Weapon Data")]
-    public WeaponData weaponData;
+    public WeaponData[] weaponData;
     public Transform firePoint;
     public GameObject muzzleFlashPrefab;
 
@@ -12,15 +12,32 @@ public class Weapon : MonoBehaviour
     private int currentExtraMagazines;
     private float nextFireTime = 0f;
     private bool isReloading = false;
-
+    private PlayerMovement playerMovement;
     private AudioSource audioSource;
+
+    private WeaponData currentWeaponData;
+
+    private int[] magazines;
+    private int[] extraMagazines;
+    private int currentWeaponIndex = 0;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
-        currentMagazine = weaponData.magazineSize;
-        currentExtraMagazines = weaponData.infiniteAmmo ? int.MaxValue : weaponData.startExtraMagazines;
+        playerMovement = GetComponentInParent<PlayerMovement>();
+        // Inicializa arrays de munição para cada arma
+        magazines = new int[weaponData.Length];
+        extraMagazines = new int[weaponData.Length];
+        for (int i = 0; i < weaponData.Length; i++)
+        {
+            magazines[i] = weaponData[i].magazineSize;
+            extraMagazines[i] = weaponData[i].infiniteAmmo ? int.MaxValue : weaponData[i].startExtraMagazines;
+        }
+        currentWeaponIndex = 0;
+        currentWeaponData = weaponData[currentWeaponIndex];
+        currentMagazine = magazines[currentWeaponIndex];
+        currentExtraMagazines = extraMagazines[currentWeaponIndex];
+        UiManager.instance.UpdateWeaponUI(currentWeaponData);
     }
 
     // Input System callbacks
@@ -35,6 +52,20 @@ public class Weapon : MonoBehaviour
         if (isPressed)
             TryReload();
     }
+    public void OnChangeWeapon(bool isPressed)
+    {
+        if (!isPressed) return;
+        // Salva o estado da arma atual
+        magazines[currentWeaponIndex] = currentMagazine;
+        extraMagazines[currentWeaponIndex] = currentExtraMagazines;
+        // Troca para a próxima arma
+        currentWeaponIndex = (currentWeaponIndex + 1) % weaponData.Length;
+        currentWeaponData = weaponData[currentWeaponIndex];
+        currentMagazine = magazines[currentWeaponIndex];
+        currentExtraMagazines = extraMagazines[currentWeaponIndex];
+        UiManager.instance.UpdateWeaponUI(currentWeaponData);
+        playerMovement.UpdateWeaponSprite(currentWeaponData);
+    }
 
     void TryShoot()
     {
@@ -46,67 +77,74 @@ public class Weapon : MonoBehaviour
             return;
         }
         Shoot();
-        nextFireTime = Time.time + weaponData.fireRate;
+        nextFireTime = Time.time + currentWeaponData.fireRate;
     }
 
     void Shoot()
     {
         // Instancia o prefab da bala
-        if (weaponData.bulletPrefab && firePoint)
+        if (currentWeaponData.bulletPrefab && firePoint)
         {
-            GameObject bullet = Instantiate(weaponData.bulletPrefab, firePoint.position, firePoint.rotation);
+            GameObject bullet = Instantiate(currentWeaponData.bulletPrefab, firePoint.position, firePoint.rotation);
             if(bullet.TryGetComponent<BulletBehavior>(out var bulletBehavior))
             {
-                bulletBehavior.SetDamage(weaponData.damage);
+                bulletBehavior.SetDamage(currentWeaponData.damage);
             }
         }
         currentMagazine--;
 
         GameObject flash = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation, firePoint);
         Destroy(flash, 0.1f); // Destroi o efeito de flash
-        audioSource.PlayOneShot(weaponData.shootSound);
-        CameraFollow.Instance.Shake(weaponData.recoilIntensity, 0.1f);
+        audioSource.PlayOneShot(currentWeaponData.shootSound);
+        CameraFollow.Instance.Shake(currentWeaponData.recoilIntensity, 0.1f);
+        UiManager.instance.UpdateWeaponUI(currentWeaponData);
     }
 
     void TryReload()
     {
-        if (weaponData.infiniteAmmo)
+        if (currentWeaponData.infiniteAmmo)
         {
-            if (currentMagazine < weaponData.magazineSize)
-                StartCoroutine(Reload(weaponData.magazineSize));
+            if (currentMagazine < currentWeaponData.magazineSize)
+                StartCoroutine(Reload(currentWeaponData.magazineSize));
         }
         else
         {
-            if (currentMagazine < weaponData.magazineSize && currentExtraMagazines > 0)
-                StartCoroutine(Reload(weaponData.magazineSize));
+            if (currentMagazine < currentWeaponData.magazineSize && currentExtraMagazines > 0)
+                StartCoroutine(Reload(currentWeaponData.magazineSize));
         }
     }
 
     System.Collections.IEnumerator Reload(int magazineSize)
     {
         isReloading = true;
-        audioSource.PlayOneShot(weaponData.reloadSound);
-        yield return new WaitForSeconds(weaponData.reloadTime);
+        audioSource.PlayOneShot(currentWeaponData.reloadSound);
+        yield return new WaitForSeconds(currentWeaponData.reloadTime);
         int bulletsToReload = magazineSize - currentMagazine;
-        if (weaponData.infiniteAmmo)
+        if (currentWeaponData.infiniteAmmo)
         {
             currentMagazine = magazineSize;
         }
         else
         {
-            int bulletsAvailable = Mathf.Min(bulletsToReload, currentExtraMagazines * weaponData.magazineSize);
+            int bulletsAvailable = Mathf.Min(bulletsToReload, currentExtraMagazines);
             currentMagazine += bulletsAvailable;
-            currentExtraMagazines -= bulletsAvailable / weaponData.magazineSize;
-            if (currentMagazine > weaponData.magazineSize)
-                currentMagazine = weaponData.magazineSize;
+            currentExtraMagazines -= bulletsAvailable;
+            if (currentMagazine > currentWeaponData.magazineSize)
+                currentMagazine = currentWeaponData.magazineSize;
         }
+        // Sincroniza o array após recarregar
+        magazines[currentWeaponIndex] = currentMagazine;
+        extraMagazines[currentWeaponIndex] = currentExtraMagazines;
         isReloading = false;
+        UiManager.instance.UpdateWeaponUI(currentWeaponData);
     }
 
     // Métodos para adicionar munição extra futuramente
     public void AddExtraMagazine(int amount)
     {
-        currentExtraMagazines += amount;
+        extraMagazines[currentWeaponIndex] += amount;
+        currentExtraMagazines = extraMagazines[currentWeaponIndex];
+        UiManager.instance.UpdateWeaponUI(currentWeaponData);
     }
 
     // Getters para UI
