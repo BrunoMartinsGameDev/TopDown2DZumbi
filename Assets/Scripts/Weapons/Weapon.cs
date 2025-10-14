@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public WeaponData[] weaponData;
     public Transform firePoint;
     public GameObject muzzleFlashPrefab;
+    public AudioClip switchWeaponSound;
 
     private int currentMagazine;
     private int currentExtraMagazines;
@@ -20,6 +21,9 @@ public class Weapon : MonoBehaviour
     private int[] magazines;
     private int[] extraMagazines;
     private int currentWeaponIndex = 0;
+
+    [Header("UI Elements")]
+    public GameObject loadingIcon;
 
     void Start()
     {
@@ -65,6 +69,7 @@ public class Weapon : MonoBehaviour
         currentExtraMagazines = extraMagazines[currentWeaponIndex];
         UiManager.instance.UpdateWeaponUI(currentWeaponData);
         playerMovement.UpdateWeaponSprite(currentWeaponData);
+        audioSource.PlayOneShot(switchWeaponSound);
     }
 
     void TryShoot()
@@ -117,6 +122,7 @@ public class Weapon : MonoBehaviour
     System.Collections.IEnumerator Reload(int magazineSize)
     {
         isReloading = true;
+        loadingIcon.SetActive(true);
         audioSource.PlayOneShot(currentWeaponData.reloadSound);
         yield return new WaitForSeconds(currentWeaponData.reloadTime);
         int bulletsToReload = magazineSize - currentMagazine;
@@ -136,6 +142,7 @@ public class Weapon : MonoBehaviour
         magazines[currentWeaponIndex] = currentMagazine;
         extraMagazines[currentWeaponIndex] = currentExtraMagazines;
         isReloading = false;
+        loadingIcon.SetActive(false);
         UiManager.instance.UpdateWeaponUI(currentWeaponData);
     }
 
