@@ -19,6 +19,17 @@ public class EnemyStats : MonoBehaviour, IShottable
                 Debug.Log($"{gameObject.name} died.");
                 ChangeSprite(statsData != null ? statsData.deathSprite : null);
                 audioSource.Stop();
+                
+                // Para o ataque antes de invocar onDeath
+                EnemyAttack attack = GetComponent<EnemyAttack>();
+                if (attack != null)
+                    attack.OnEnemyDeath();
+                
+                // Desativa a IA
+                EnemyFollowAI ai = GetComponent<EnemyFollowAI>();
+                if (ai != null)
+                    ai.enabled = false;
+                
                 onDeath?.Invoke();
             }
         } }

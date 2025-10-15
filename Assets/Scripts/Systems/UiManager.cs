@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class UiManager : MonoBehaviour
     public GameObject pistolUIImage;
     public GameObject rifleUIImage;
     public TMPro.TMP_Text ammoText;
+    public Slider healthSlider;
+    public GameObject gameOverPanel;
+    public GameObject deathSpriteUI;
+    public GameObject playerSpriteUI;
     
 
     private void Awake()
@@ -23,6 +28,12 @@ public class UiManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
     }
 
     public void UpdateWeaponUI(WeaponData newWeaponData)
@@ -48,5 +59,25 @@ public class UiManager : MonoBehaviour
                 rifleUIImage.SetActive(false);
                 break;
         }
+    }
+
+    public void UpdateHealthUI(float currentHealth, float maxHealth)
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.value = currentHealth;
+        }
+    }
+    public void ShowDeathSprite(){
+        if(deathSpriteUI != null && playerSpriteUI != null){
+            deathSpriteUI.SetActive(true);
+            playerSpriteUI.SetActive(false);
+        }
+    }
+
+    public void ShowGameOver()
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
     }
 }
