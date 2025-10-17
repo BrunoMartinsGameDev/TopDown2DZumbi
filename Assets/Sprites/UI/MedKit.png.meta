@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e39d1db6b3bdd5446849d9e99ad3f93a
+guid: 9cd238479e58edf4aa4c437141bee218
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7764137834438774702
-    second: MoneyUI_0
+      213: 1142586732419344882
+    second: MedKit_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,10 +49,10 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.52230245, y: 0.4418344}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 111, y: 159, z: 59, w: 248}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -152,23 +152,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MoneyUI_0
+      name: MedKit_0
       rect:
         serializedVersion: 2
-        x: 111
-        y: 159
-        width: 480
-        height: 240
+        x: 72
+        y: 120
+        width: 454
+        height: 389
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eafc4e86932cfbb60800000000000000
-      internalID: 7764137834438774702
+      spriteID: 2f9ede654984bdf00800000000000000
+      internalID: 1142586732419344882
       vertices: []
       indices: 
       edges: []
@@ -178,7 +178,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MoneyUI_0: 7764137834438774702
+      MedKit_0: 1142586732419344882
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -30,12 +30,18 @@ public class EnemySpawner : MonoBehaviour
     {
         if (waveData == null || waveData.enemies == null) return;
         enemiesToSpawn = new int[waveData.enemies.Length];
+        int totalEnemies = 0;
         for (int i = 0; i < waveData.enemies.Length; i++)
         {
             enemiesToSpawn[i] = waveData.enemies[i].amount;
+            totalEnemies += waveData.enemies[i].amount;
         }
         currentSpawnInterval = Mathf.Max(0.1f, waveData.initialSpawnInterval);
         activeEnemies = 0;
+        
+        // Notifica o GameManager
+        if (GameManager.Instance != null)
+            GameManager.Instance.StartWave(currentLevel + 1, totalEnemies);
     }
 
     //SERA REMOVIDO DEPOIS

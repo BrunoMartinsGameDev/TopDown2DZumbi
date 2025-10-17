@@ -15,6 +15,11 @@ public class UiManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject deathSpriteUI;
     public GameObject playerSpriteUI;
+    public TMPro.TMP_Text moneyText;
+    public GameObject waveCompletedPanel;
+    public TMPro.TMP_Text waveCompletedText;
+    public GameObject purchaseMessagePanel;
+    public TMPro.TMP_Text purchaseMessageText;
     
 
     private void Awake()
@@ -34,6 +39,10 @@ public class UiManager : MonoBehaviour
     {
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
+        if (waveCompletedPanel != null)
+            waveCompletedPanel.SetActive(false);
+        if (purchaseMessagePanel != null)
+            purchaseMessagePanel.SetActive(false);
     }
 
     public void UpdateWeaponUI(WeaponData newWeaponData)
@@ -79,5 +88,54 @@ public class UiManager : MonoBehaviour
     {
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
+    }
+
+    public void UpdateMoneyUI(int money)
+    {
+        if (moneyText != null)
+            moneyText.text = $"${money}";
+    }
+
+    public void ShowWaveCompleted(int wave, int reward)
+    {
+        if (waveCompletedPanel != null && waveCompletedText != null)
+        {
+            waveCompletedText.text = $"Wave {wave} Completada!\n+${reward}";
+            waveCompletedPanel.SetActive(true);
+            Invoke(nameof(HideWaveCompleted), 3f);
+        }
+    }
+
+    void HideWaveCompleted()
+    {
+        if (waveCompletedPanel != null)
+            waveCompletedPanel.SetActive(false);
+    }
+
+    public void ShowPurchaseSuccess(string itemName)
+    {
+        ShowPurchaseMessage($"{itemName} comprado!", Color.green);
+    }
+
+    public void ShowPurchaseFailed(string reason)
+    {
+        ShowPurchaseMessage(reason, Color.red);
+    }
+
+    void ShowPurchaseMessage(string message, Color color)
+    {
+        if (purchaseMessagePanel != null && purchaseMessageText != null)
+        {
+            purchaseMessageText.text = message;
+            purchaseMessageText.color = color;
+            purchaseMessagePanel.SetActive(true);
+            Invoke(nameof(HidePurchaseMessage), 2f);
+        }
+    }
+
+    void HidePurchaseMessage()
+    {
+        if (purchaseMessagePanel != null)
+            purchaseMessagePanel.SetActive(false);
     }
 }

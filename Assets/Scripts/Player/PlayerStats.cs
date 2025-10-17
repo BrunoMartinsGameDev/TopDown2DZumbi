@@ -44,6 +44,17 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        if (isDead) return;
+        
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, statsData != null ? statsData.maxHealth : 100f);
+        
+        // Atualiza UI
+        UiManager.instance?.UpdateHealthUI(currentHealth, statsData != null ? statsData.maxHealth : 100f);
+    }
+
     void Die()
     {
         if (isDead) return;
