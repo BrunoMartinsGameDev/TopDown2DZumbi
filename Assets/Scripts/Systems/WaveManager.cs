@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour
+public class WaveManager : MonoBehaviour
 {
+    public static WaveManager Instance { get; private set; }
+
     [Header("Spawner Settings")]
     public WaveData[] waves;
     public int currentLevel = 0;
@@ -13,6 +15,16 @@ public class EnemySpawner : MonoBehaviour
     private int activeEnemies = 0;
     private int[] enemiesToSpawn;
     private float currentSpawnInterval;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     void Start()
     {
@@ -89,18 +101,28 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnLoop()
     {
-        bool enemiesLeft = true;
-        while (enemiesLeft)
+        while (true)
         {
-            enemiesLeft = false;
+            bool spawned = false;
             for (int i = 0; i < enemiesToSpawn.Length; i++)
             {
                 if (enemiesToSpawn[i] > 0 && activeEnemies < waveData.maxActiveEnemies)
                 {
                     SpawnEnemy(i);
-                    enemiesLeft = true;
+                    spawned = true;
                     yield return new WaitForSeconds(currentSpawnInterval);
                 }
+            }
+            // Se não spawnou ninguém, mas ainda há inimigos para spawnar, espera um pouco e tenta de novo
+            if (!spawned)
+            {
+                bool anyLeft = false;
+                for (int i = 0; i < enemiesToSpawn.Length; i++)
+                    if (enemiesToSpawn[i] > 0)
+                        anyLeft = true;
+                if (!anyLeft)
+                    break; // acabou todos os inimigos para spawnar
+                yield return new WaitForSeconds(0.2f); // espera antes de tentar de novo
             }
         }
         spawnLoopCoroutine = null;

@@ -30,6 +30,10 @@ public class EnemyStats : MonoBehaviour, IShottable
                 if (ai != null)
                     ai.enabled = false;
                 
+                // Notifica o WaveManager
+                if (WaveManager.Instance != null)
+                    WaveManager.Instance.OnEnemyDeath();
+                
                 // Notifica o GameManager
                 if (GameManager.Instance != null)
                     GameManager.Instance.OnEnemyKilled();

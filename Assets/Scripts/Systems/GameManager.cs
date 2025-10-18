@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    
+
     private int currentMoney = 0;
     private int currentWave = 0;
     private int enemiesRemainingInWave = 0;
@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+    void Start()
+    {
+        currentMoney = 100; // Define a quantia inicial de dinheiro
+        UiManager.instance?.UpdateMoneyUI(currentMoney);
     }
 
     public void AddMoney(int amount)
@@ -44,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void OnEnemyKilled()
     {
         enemiesRemainingInWave--;
+        Debug.Log($"Enemy killed. Enemies remaining in wave: {enemiesRemainingInWave}");
         if (enemiesRemainingInWave <= 0)
         {
             OnWaveCompleted();
@@ -55,6 +61,12 @@ public class GameManager : MonoBehaviour
         int reward = CalculateWaveReward(currentWave);
         AddMoney(reward);
         UiManager.instance?.ShowWaveCompleted(currentWave, reward);
+    }
+
+     // Retorna true se uma wave está ativa (ainda há inimigos na wave)
+    public bool IsWaveActive()
+    {
+        return enemiesRemainingInWave > 0;
     }
 
     int CalculateWaveReward(int wave)

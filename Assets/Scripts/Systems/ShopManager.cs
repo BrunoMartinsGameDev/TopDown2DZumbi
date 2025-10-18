@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance { get; private set; }
-    
+
     public ShopItemData[] shopItems;
     private GameObject shopPanel;
     private PlayerStats playerStats;
@@ -32,15 +32,17 @@ public class ShopManager : MonoBehaviour
     public void BuyItem(ShopItemData item)
     {
         if (item == null || GameManager.Instance == null) return;
-
+        Debug.Log($"Buying item: {item.itemName} for ${item.price}");
         if (GameManager.Instance.SpendMoney(item.price))
         {
             ApplyItemEffect(item);
             UiManager.instance?.ShowPurchaseSuccess(item.itemName);
+            Debug.Log($"Item purchased: {item.itemName}");
         }
         else
         {
             UiManager.instance?.ShowPurchaseFailed("Dinheiro insuficiente!");
+            Debug.Log($"Failed to purchase item: {item.itemName} - insufficient funds.");
         }
     }
 
@@ -51,10 +53,9 @@ public class ShopManager : MonoBehaviour
             case ShopItemType.RifleAmmo:
                 if (playerWeapon != null)
                 {
-                    playerWeapon.AddExtraMagazine(item.amount);
+                    AddExtraMagazineToWeapon("rifle", item.amount);
                 }
                 break;
-            
             case ShopItemType.Health:
                 if (playerStats != null)
                 {
@@ -64,18 +65,40 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    void AddExtraMagazineToWeapon(string weaponName, int amount)
+    {
+        // Procura o índice do rifle no array de armas
+        int rifleIndex = -1;
+        for (int i = 0; i < playerWeapon.weaponData.Length; i++)
+        {
+            if (playerWeapon.weaponData[i].weaponName.ToLower().Contains(weaponName))
+            {
+                rifleIndex = i;
+                break;
+            }
+        }
+        if (rifleIndex != -1)
+        {
+            playerWeapon.AddExtraMagazineToWeapon(rifleIndex, amount);
+        }
+        else
+        {
+            Debug.LogWarning("Rifle não encontrado no array de armas!");
+        }
+    }
+
     public void OpenShop()
     {
         if (shopPanel != null)
             shopPanel.SetActive(true);
-        Time.timeScale = 0f; // Pausa o jogo
+        FindFirstObjectByType<PlayerInputGeneral>()?.ChangeControlScheme(ControlMap.UI);
     }
 
     public void CloseShop()
     {
         if (shopPanel != null)
             shopPanel.SetActive(false);
-        Time.timeScale = 1f; // Despausa o jogo
+        FindFirstObjectByType<PlayerInputGeneral>()?.ChangeControlScheme(ControlMap.Player);
     }
 
     public void SetShopPanel(GameObject panel)

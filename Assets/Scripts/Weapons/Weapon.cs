@@ -146,12 +146,25 @@ public class Weapon : MonoBehaviour
         UiManager.instance.UpdateWeaponUI(currentWeaponData);
     }
 
-    // Métodos para adicionar munição extra futuramente
+
+    // Adiciona munição extra para a arma atualmente equipada
     public void AddExtraMagazine(int amount)
     {
         extraMagazines[currentWeaponIndex] += amount;
         currentExtraMagazines = extraMagazines[currentWeaponIndex];
         UiManager.instance.UpdateWeaponUI(currentWeaponData);
+    }
+
+    // Adiciona munição extra para uma arma específica pelo índice
+    public void AddExtraMagazineToWeapon(int weaponIndex, int amount)
+    {
+        if (weaponIndex < 0 || weaponIndex >= extraMagazines.Length)
+            return;
+        extraMagazines[weaponIndex] += amount;
+        // Se a arma adicionada for a equipada, atualiza o valor atual
+        if (weaponIndex == currentWeaponIndex)
+            currentExtraMagazines = extraMagazines[weaponIndex];
+        // UiManager.instance.UpdateWeaponUI(weaponData[weaponIndex]);
     }
 
     // Getters para UI

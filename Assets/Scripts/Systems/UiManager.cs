@@ -18,6 +18,7 @@ public class UiManager : MonoBehaviour
     public TMPro.TMP_Text moneyText;
     public GameObject waveCompletedPanel;
     public TMPro.TMP_Text waveCompletedText;
+    public GameObject shopPanel;
     public GameObject purchaseMessagePanel;
     public TMPro.TMP_Text purchaseMessageText;
     
@@ -43,6 +44,8 @@ public class UiManager : MonoBehaviour
             waveCompletedPanel.SetActive(false);
         if (purchaseMessagePanel != null)
             purchaseMessagePanel.SetActive(false);
+        if (shopPanel != null)
+            ShopManager.Instance.SetShopPanel(shopPanel);
     }
 
     public void UpdateWeaponUI(WeaponData newWeaponData)

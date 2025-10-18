@@ -1,23 +1,36 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerInputGeneral : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Weapon weapon;
+
+    PlayerInput playerInput;
     void Awake()
     {
         if (playerMovement == null)
             playerMovement = GetComponentInParent<PlayerMovement>();
         if (weapon == null)
             weapon = GetComponentInChildren<Weapon>();
+        if (playerInput == null)
+            playerInput = GetComponent<PlayerInput>();
 
         if (playerMovement == null)
             Debug.LogError("PlayerInputGeneral: PlayerMovement component not found!");
         if (weapon == null)
             Debug.LogError("PlayerInputGeneral: Weapon component not found!");
+        if (playerInput == null)
+            Debug.LogError("PlayerInputGeneral: PlayerInput component not found!");
     }
-
+    public void ChangeControlScheme(ControlMap controlMap)
+    {
+        if (playerInput != null)
+        {
+            playerInput.SwitchCurrentActionMap(controlMap.ToString());
+        }
+    }
     #region Movement Input Callbacks
     // Para movimento do personagem
     public void OnMove(InputValue value)
@@ -52,4 +65,9 @@ public class PlayerInputGeneral : MonoBehaviour
         weapon.OnChangeWeapon(value.isPressed);
     }
     #endregion
+}
+public enum ControlMap
+{
+    Player,
+    UI
 }

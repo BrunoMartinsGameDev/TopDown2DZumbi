@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -6,6 +7,11 @@ public class BulletBehavior : MonoBehaviour
     private float damage = 10f;
     private Rigidbody2D rb2D;
     public float speed = 20f;
+    readonly string[] NoShotTags = new string[] {
+        "Bullet",
+        "Player",
+        "Sensor"
+        };
     public void SetDamage(float dmg)
     {
         damage = dmg;
@@ -20,6 +26,10 @@ public class BulletBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (NoShotTags.Contains(collision.tag))
+        {
+            return; // Ignora colisões com outras balas ou o jogador
+        }
         if (collision.TryGetComponent<IShottable>(out var shottable))
         {
             shottable.GetShot(damage);
