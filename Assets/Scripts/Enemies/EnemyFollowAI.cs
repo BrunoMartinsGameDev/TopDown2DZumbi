@@ -112,7 +112,11 @@ public class EnemyFollowAI : MonoBehaviour
     private bool HasDirectPath(Vector2 start, Vector2 end)
     {
         RaycastHit2D hit = Physics2D.Raycast(start, (end - start).normalized, 
-                                            Vector2.Distance(start, end), obstacleLayerMask);
+                                             Vector2.Distance(start, end), obstacleLayerMask);
+        #if UNITY_EDITOR
+        Debug.DrawLine(start, end, hit.collider == null ? Color.green : Color.red, 0.1f);
+        #endif
+        // return false;
         return hit.collider == null;
     }
     

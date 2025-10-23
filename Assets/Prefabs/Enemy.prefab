@@ -56,7 +56,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   pathUpdateInterval: 0.5
-  gridSize: 1
+  gridSize: 1.5
 --- !u!114 &317661661766306590
 MonoBehaviour:
   m_ObjectHideFlags: 0
