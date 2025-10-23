@@ -1,0 +1,20 @@
+{
+    "asset": "0fbcf31d6ec76f845a0c482b4c9307d2",
+    "fileName": "019a0ec0-f185-746b-8994-ed27e2ad19e7.png",
+    "prompt": "I want a room in a wooden house, pixel art style, this room must be stained with dirt, blood and other things, it must have a dirty and worn look, top-down view, it must have furniture of a normal room, but with the apocalyptic aspect described above",
+    "negativePrompt": "isometric vision",
+    "model": "94c4260f-b988-40e7-b3d3-435b9f449bd0",
+    "modelName": "Flux.1 Dev",
+    "customSeed": -1,
+    "w3CTraceId": "c32a93a0500341f781cd7af950af914d",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

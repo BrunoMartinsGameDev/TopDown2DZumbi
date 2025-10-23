@@ -1,0 +1,20 @@
+{
+    "asset": "0fbcf31d6ec76f845a0c482b4c9307d2",
+    "fileName": "019a0ebc-9abd-74c4-a9f2-8b5a9ca915cc.jpg",
+    "prompt": "Quero um quarto em uma casa de madeira, estilo pixel art, este quarto deve estar manchando de sujeira, sangue e outras coisas, ele deve ter um aspecto sujo e desgastado",
+    "negativePrompt": "",
+    "model": "2effde32-6e16-4cc1-8cf7-85dca1e3b2e6",
+    "modelName": "El Diablo",
+    "customSeed": -1,
+    "w3CTraceId": "8700b50357ec5503f77b2a4d387071b1",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}
