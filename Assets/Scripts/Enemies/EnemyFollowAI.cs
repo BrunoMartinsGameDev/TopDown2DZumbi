@@ -24,6 +24,10 @@ public class EnemyFollowAI : MonoBehaviour
     private float lastPathUpdate = 0f;
     private Vector2 lastTargetPosition;
     
+    public float GetStopDistance()
+    {
+        return stopDistance;
+    }
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -116,7 +120,6 @@ public class EnemyFollowAI : MonoBehaviour
         #if UNITY_EDITOR
         Debug.DrawLine(start, end, hit.collider == null ? Color.green : Color.red, 0.1f);
         #endif
-        // return false;
         return hit.collider == null;
     }
     

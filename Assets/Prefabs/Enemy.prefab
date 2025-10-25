@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 705806311292209993}
-  - component: {fileID: 6009397802454366694}
   - component: {fileID: 317661661766306590}
   - component: {fileID: 5915315354690054484}
   - component: {fileID: 3630663107220280885}
   - component: {fileID: 5574042298152604998}
   - component: {fileID: 8825039750449340680}
+  - component: {fileID: 418276903591611897}
+  - component: {fileID: 6317838761407705478}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -38,25 +39,6 @@ Transform:
   - {fileID: 6255702056814311207}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6009397802454366694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2767087746708396365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461ee4f1a0dba3c469f6bec6f8b3ea21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyFollowAI
-  detectionRange: 1000
-  stopDistance: 1.5
-  obstacleLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  pathUpdateInterval: 0.5
-  gridSize: 2
 --- !u!114 &317661661766306590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,8 +56,8 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6009397802454366694}
-        m_TargetAssemblyTypeName: EnemyFollowAI, Assembly-CSharp
+      - m_Target: {fileID: 6317838761407705478}
+        m_TargetAssemblyTypeName: EnemyFollowAI_AStar, Assembly-CSharp
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -352,6 +334,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &418276903591611897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767087746708396365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.Seeker
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!114 &6317838761407705478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767087746708396365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71dab7c6adf6b5742b617de9c1f529b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyFollowAI_AStar
+  detectionRange: 50
+  stopDistance: 1.5
+  nextWaypointDistance: 0.5
+  pathUpdateInterval: 0.5
 --- !u!1 &7444777008435292138
 GameObject:
   m_ObjectHideFlags: 0

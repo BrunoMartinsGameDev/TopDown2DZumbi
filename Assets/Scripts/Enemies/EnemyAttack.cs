@@ -28,7 +28,7 @@ public class EnemyAttack : MonoBehaviour
             attackCollider = gameObject.AddComponent<CircleCollider2D>();
         }
         attackCollider.isTrigger = true;
-        attackCollider.radius = 1.5f; // Raio de ataque
+        attackCollider.radius = enemyStats.gameObject.GetComponent<EnemyFollowAI_AStar>().GetStopDistance(); // Raio de ataque
     }
 
     void Update()
