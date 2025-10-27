@@ -9,12 +9,17 @@ public class WaveManager : MonoBehaviour
     public WaveData[] waves;
     public int currentLevel = 0;
     public Transform[] spawnPoints;
+    
+    [Header("Wave Progression")]
+    [SerializeField] private float timeBetweenWaves = 10f;
 
     private WaveData waveData;
     private Coroutine spawnLoopCoroutine;
     private int activeEnemies = 0;
     private int[] enemiesToSpawn;
     private float currentSpawnInterval;
+    private bool allEnemiesSpawned = false;
+    private bool firstWaveStarted = false;
 
     void Awake()
     {
@@ -59,8 +64,10 @@ public class WaveManager : MonoBehaviour
     //SERA REMOVIDO DEPOIS
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        // Só permite iniciar manualmente a primeira wave
+        if(!firstWaveStarted && Input.GetKeyDown(KeyCode.E))
         {
+            firstWaveStarted = true;
             StartSpawnLoop();
         }
     }
@@ -68,6 +75,12 @@ public class WaveManager : MonoBehaviour
     public void OnEnemyDeath()
     {
         activeEnemies = Mathf.Max(0, activeEnemies - 1);
+        
+        // Verifica se a wave acabou (todos spawnados e todos mortos)
+        if (allEnemiesSpawned && activeEnemies <= 0)
+        {
+            OnWaveComplete();
+        }
     }
 
     // Spawna um inimigo de um tipo específico
@@ -101,6 +114,8 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator SpawnLoop()
     {
+        allEnemiesSpawned = false;
+        
         while (true)
         {
             bool spawned = false;
@@ -121,10 +136,70 @@ public class WaveManager : MonoBehaviour
                     if (enemiesToSpawn[i] > 0)
                         anyLeft = true;
                 if (!anyLeft)
+                {
+                    allEnemiesSpawned = true;
+                    Debug.Log("Todos os inimigos foram spawnados!");
                     break; // acabou todos os inimigos para spawnar
+                }
                 yield return new WaitForSeconds(0.2f); // espera antes de tentar de novo
             }
         }
         spawnLoopCoroutine = null;
+        
+        // Verifica se a wave já acabou (caso todos tenham sido mortos durante o spawn)
+        if (activeEnemies <= 0)
+        {
+            OnWaveComplete();
+        }
+    }
+    
+    private void OnWaveComplete()
+    {
+        Debug.Log($"Wave {currentLevel + 1} completa!");
+        
+        // Verifica se era a última wave
+        if (currentLevel >= waves.Length - 1)
+        {
+            OnAllWavesComplete();
+        }
+        else
+        {
+            // Só mostra o painel de wave completada se não for a última
+            // O GameManager vai mostrar o painel via OnEnemyKilled
+            
+            // Inicia a próxima wave após o timer
+            StartCoroutine(StartNextWaveAfterDelay());
+        }
+    }
+    
+    private IEnumerator StartNextWaveAfterDelay()
+    {
+        Debug.Log($"Próxima wave em {timeBetweenWaves} segundos...");
+        
+        // Aqui você pode mostrar uma UI de contagem regressiva se quiser
+        if (UiManager.instance != null)
+        {
+            UiManager.instance.ShowNextWaveTimer(timeBetweenWaves);
+        }
+        
+        yield return new WaitForSeconds(timeBetweenWaves);
+        
+        currentLevel++;
+        SetWave(currentLevel);
+        StartSpawnLoop();
+    }
+    
+    private void OnAllWavesComplete()
+    {
+        Debug.Log("Todas as waves completadas! Vitória!");
+        
+        // Mostra painel de vitória
+        if (UiManager.instance != null)
+        {
+            UiManager.instance.ShowVictoryPanel();
+        }
+        
+        // Pausa o jogo
+        Time.timeScale = 0f;
     }
 }

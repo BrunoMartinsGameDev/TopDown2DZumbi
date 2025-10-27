@@ -58,9 +58,19 @@ public class GameManager : MonoBehaviour
 
     void OnWaveCompleted()
     {
-        int reward = CalculateWaveReward(currentWave);
-        AddMoney(reward);
-        UiManager.instance?.ShowWaveCompleted(currentWave, reward);
+        // Verifica se é a última wave (não mostra painel de wave completada se for)
+        if (WaveManager.Instance != null && WaveManager.Instance.currentLevel >= WaveManager.Instance.waves.Length - 1)
+        {
+            // É a última wave, não mostra painel de wave completada
+            // O painel de vitória será mostrado pelo WaveManager
+            int reward = CalculateWaveReward(currentWave);
+            AddMoney(reward);
+            return;
+        }
+        
+        int normalReward = CalculateWaveReward(currentWave);
+        AddMoney(normalReward);
+        UiManager.instance?.ShowWaveCompleted(currentWave, normalReward);
     }
 
      // Retorna true se uma wave está ativa (ainda há inimigos na wave)

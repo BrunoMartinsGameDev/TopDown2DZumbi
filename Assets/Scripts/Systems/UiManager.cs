@@ -21,6 +21,9 @@ public class UiManager : MonoBehaviour
     public GameObject shopPanel;
     public GameObject purchaseMessagePanel;
     public TMPro.TMP_Text purchaseMessageText;
+    public GameObject nextWaveTimerPanel;
+    public TMPro.TMP_Text nextWaveTimerText;
+    public GameObject victoryPanel;
     
 
     private void Awake()
@@ -44,6 +47,10 @@ public class UiManager : MonoBehaviour
             waveCompletedPanel.SetActive(false);
         if (purchaseMessagePanel != null)
             purchaseMessagePanel.SetActive(false);
+        if (nextWaveTimerPanel != null)
+            nextWaveTimerPanel.SetActive(false);
+        if (victoryPanel != null)
+            victoryPanel.SetActive(false);
         if (shopPanel != null)
             ShopManager.Instance.SetShopPanel(shopPanel);
     }
@@ -140,5 +147,34 @@ public class UiManager : MonoBehaviour
     {
         if (purchaseMessagePanel != null)
             purchaseMessagePanel.SetActive(false);
+    }
+
+    public void ShowNextWaveTimer(float time)
+    {
+        if (nextWaveTimerPanel != null)
+        {
+            nextWaveTimerPanel.SetActive(true);
+            StartCoroutine(UpdateNextWaveTimer(time));
+        }
+    }
+
+    System.Collections.IEnumerator UpdateNextWaveTimer(float time)
+    {
+        float remainingTime = time;
+        while (remainingTime > 0)
+        {
+            if (nextWaveTimerText != null)
+                nextWaveTimerText.text = $"Próxima Wave em: {Mathf.CeilToInt(remainingTime)}s";
+            yield return new WaitForSeconds(1f);
+            remainingTime -= 1f;
+        }
+        if (nextWaveTimerPanel != null)
+            nextWaveTimerPanel.SetActive(false);
+    }
+
+    public void ShowVictoryPanel()
+    {
+        if (victoryPanel != null)
+            victoryPanel.SetActive(true);
     }
 }
