@@ -5,7 +5,9 @@ public class Weapon : MonoBehaviour
 {
     [Header("Weapon Data")]
     public WeaponData[] weaponData;
-    public Transform firePoint;
+    public Transform[] firePoints;
+
+    
     public GameObject muzzleFlashPrefab;
     public AudioClip switchWeaponSound;
 
@@ -88,9 +90,9 @@ public class Weapon : MonoBehaviour
     void Shoot()
     {
         // Instancia o prefab da bala
-        if (currentWeaponData.bulletPrefab && firePoint)
+        if (currentWeaponData.bulletPrefab && firePoints.Length > 0)
         {
-            GameObject bullet = Instantiate(currentWeaponData.bulletPrefab, firePoint.position, firePoint.rotation);
+            GameObject bullet = Instantiate(currentWeaponData.bulletPrefab, firePoints[currentWeaponIndex].position, firePoints[currentWeaponIndex].rotation);
             if(bullet.TryGetComponent<BulletBehavior>(out var bulletBehavior))
             {
                 bulletBehavior.SetDamage(currentWeaponData.damage);
@@ -98,13 +100,15 @@ public class Weapon : MonoBehaviour
         }
         currentMagazine--;
 
-        GameObject flash = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation, firePoint);
+        Quaternion flashRotation = firePoints[currentWeaponIndex].rotation * Quaternion.Euler(0, 0, -45);
+        
+        GameObject flash = Instantiate(muzzleFlashPrefab, firePoints[currentWeaponIndex].position, flashRotation, firePoints[currentWeaponIndex]);
+
         Destroy(flash, 0.1f); // Destroi o efeito de flash
         audioSource.PlayOneShot(currentWeaponData.shootSound);
         CameraFollow.Instance.Shake(currentWeaponData.recoilIntensity, 0.1f);
         UiManager.instance.UpdateWeaponUI(currentWeaponData);
     }
-
     void TryReload()
     {
         if (currentWeaponData.infiniteAmmo)

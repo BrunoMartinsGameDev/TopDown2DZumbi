@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: Freeform Light 2D
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -68,8 +68,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.009300053, y: 0.2245, z: 0}
-    m_Extent: {x: 1.3624, y: 1.1808, z: 0}
+    m_Center: {x: -0.0019499958, y: -0.00065001845, z: 0}
+    m_Extent: {x: 0.99944997, y: 0.99905, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -80,11 +80,11 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 0.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: 0.02416706, y: -0.45721084, z: 0}
-  - {x: 0.0731433, y: 0.19074413, z: 0}
-  - {x: 0.8744048, y: 0.2595073, z: 0}
-  - {x: 0.08855528, y: 0.28848168, z: 0}
-  - {x: 0.016443714, y: 0.9064969, z: 0}
-  - {x: -0.030218393, y: 0.2777843, z: 0}
-  - {x: -0.85301065, y: 0.24326515, z: 0}
-  - {x: -0.034933016, y: 0.19926319, z: 0}
+  - {x: 0, y: -0.5, z: 0}
+  - {x: 0.038865894, y: -0.037099764, z: 0}
+  - {x: 0.5, y: 0, z: 0}
+  - {x: 0.0462126, y: 0.04652357, z: 0}
+  - {x: 0, y: 0.5, z: 0}
+  - {x: -0.03828366, y: 0.045907766, z: 0}
+  - {x: -0.50313133, y: 0, z: 0}
+  - {x: -0.034933016, y: -0.032613337, z: 0}
