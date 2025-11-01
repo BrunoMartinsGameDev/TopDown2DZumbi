@@ -1,0 +1,13 @@
+{
+    "asset": "f292f24c0459d1e4aa697a6aef7518f6",
+    "fileName": "019a4050-cbd9-72ff-82c9-170c889ab709.wav",
+    "prompt": "A high imapct sound, terror atmosphere. must be terryfing",
+    "negativePrompt": "human voice",
+    "model": "ee31b223-3fe1-4ae6-bf54-d8a80bb4b0e1",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "526896bdca178e3d6a77a17039efdbf0",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}

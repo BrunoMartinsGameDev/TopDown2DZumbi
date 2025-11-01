@@ -1,0 +1,13 @@
+{
+    "asset": "f292f24c0459d1e4aa697a6aef7518f6",
+    "fileName": "019a404a-c95c-7e07-8b79-8ce40bdffc09.wav",
+    "prompt": "Mouse Click when clicking a button, terror atmosphere. must be terryfing",
+    "negativePrompt": "",
+    "model": "ee31b223-3fe1-4ae6-bf54-d8a80bb4b0e1",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "da495e888c10adf8d91ae01a3b9552db",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}

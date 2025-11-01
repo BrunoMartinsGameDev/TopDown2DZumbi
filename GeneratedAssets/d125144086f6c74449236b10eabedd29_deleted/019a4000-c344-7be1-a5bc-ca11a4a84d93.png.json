@@ -1,0 +1,20 @@
+{
+    "asset": "d125144086f6c74449236b10eabedd29",
+    "fileName": "019a4000-c344-7be1-a5bc-ca11a4a84d93.png",
+    "prompt": "Pixel art image, full-body top-down view of a male character, from the waist up, leaning against a dark, decaying wooden wall. He is wearing a dark blue cap/bonnet and has the grim, serious face previously developed in pixel art. The character is in a dynamic, slightly slumped pose, similar to the provided stick figure sketch, holding a pistol. The overall style is dark horror pixel art, with muted, desaturated colors, subtle bloodstains on the wall and character, and a sense of dread. No UI elements or text.",
+    "negativePrompt": "",
+    "model": "5b5b2af1-6ea4-4266-b087-cc9f3bf4f450",
+    "modelName": "Flux.1 Dev",
+    "customSeed": -1,
+    "w3CTraceId": "cdc98982d4257caa6fdaaeb016220cae",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

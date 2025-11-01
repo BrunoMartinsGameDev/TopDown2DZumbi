@@ -1,0 +1,13 @@
+{
+    "asset": "55b418a5e2abe7c46ae0a41a5864865d",
+    "fileName": "019a4046-b624-745f-a75b-b3326d7be503.wav",
+    "prompt": "Hover Sound when mouse hover the button, terror atmosphere",
+    "negativePrompt": "",
+    "model": "ee31b223-3fe1-4ae6-bf54-d8a80bb4b0e1",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "15f18722a04edf6815d0c42ad88a39e0",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}

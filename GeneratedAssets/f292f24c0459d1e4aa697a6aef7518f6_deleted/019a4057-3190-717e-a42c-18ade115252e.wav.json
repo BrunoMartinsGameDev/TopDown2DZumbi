@@ -1,0 +1,13 @@
+{
+    "asset": "f292f24c0459d1e4aa697a6aef7518f6",
+    "fileName": "019a4057-3190-717e-a42c-18ade115252e.wav",
+    "prompt": "GunShot sound, terror atmosphere. must be terryfing zombie",
+    "negativePrompt": "human voice",
+    "model": "ee31b223-3fe1-4ae6-bf54-d8a80bb4b0e1",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "ed29eaf3eae9076617e798df0bb79dcd",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}
