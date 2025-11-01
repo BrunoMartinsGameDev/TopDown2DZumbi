@@ -198,7 +198,7 @@ public class WaveManager : MonoBehaviour
         {
             UiManager.instance.ShowVictoryPanel();
         }
-        
+        CameraFollow.Instance.StopShake();
         // Pausa o jogo
         Time.timeScale = 0f;
     }

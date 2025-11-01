@@ -67,4 +67,14 @@ public class CameraFollow : MonoBehaviour
         shakeOffset = Vector3.zero;
         shakeCoroutine = null;
     }
+
+    public void StopShake()
+    {
+        if (shakeCoroutine != null)
+        {
+            StopCoroutine(shakeCoroutine);
+            shakeCoroutine = null;
+        }
+        shakeOffset = Vector3.zero;
+    }
 }

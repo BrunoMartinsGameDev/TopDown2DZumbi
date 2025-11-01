@@ -64,7 +64,8 @@ public class PlayerStats : MonoBehaviour
         PlayerMovement movement = GetComponent<PlayerMovement>();
         if (movement != null)
             movement.enabled = false;
-        
+
+        CameraFollow.Instance.StopShake();
         // Pausa o jogo e mostra game over
         Time.timeScale = 0f;
         UiManager.instance?.ShowGameOver();
