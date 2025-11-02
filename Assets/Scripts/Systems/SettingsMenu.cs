@@ -44,35 +44,33 @@ public class SettingsMenu : MonoBehaviour
     {
         GameSettingsManager.Instance.masterVolume = masterVolumeSlider.value;
         GameSettingsManager.Instance.SaveSettings();
-        AudioListener.volume = masterVolumeSlider.value;
+        SoundsManager.Instance.SetMasterVolume(masterVolumeSlider.value);
     }
     public void OnMusicVolumeChanged()
     {
-        Debug.LogWarning("Music change functionality is not yet implemented.");
         GameSettingsManager.Instance.musicVolume = musicVolumeSlider.value;
         GameSettingsManager.Instance.SaveSettings();
-        // Aqui você pode atualizar o volume do mixer de música
+        SoundsManager.Instance.SetMusicVolume(musicVolumeSlider.value);
     }
     public void OnSFXVolumeChanged()
     {
-        Debug.LogWarning("SFX change functionality is not yet implemented.");
         GameSettingsManager.Instance.sfxVolume = sfxVolumeSlider.value;
         GameSettingsManager.Instance.SaveSettings();
-        // Aqui você pode atualizar o volume do mixer de efeitos
+        SoundsManager.Instance.SetSFXVolume(sfxVolumeSlider.value);
     }
     public void OnMusicToggleChanged()
     {
-        Debug.LogWarning("Music change functionality is not yet implemented.");
         GameSettingsManager.Instance.musicEnabled = musicToggle.isOn;
         GameSettingsManager.Instance.SaveSettings();
-        // Ative/desative a música aqui
+        musicVolumeSlider.interactable = musicToggle.isOn;
+        SoundsManager.Instance.SetMusicVolume(musicToggle.isOn ? GameSettingsManager.Instance.musicVolume : 0f);
     }
     public void OnSFXToggleChanged()
     {
-        Debug.LogWarning("SFX change functionality is not yet implemented.");
         GameSettingsManager.Instance.sfxEnabled = sfxToggle.isOn;
         GameSettingsManager.Instance.SaveSettings();
-        // Ative/desative efeitos aqui
+        sfxVolumeSlider.interactable = sfxToggle.isOn;
+        SoundsManager.Instance.SetSFXVolume(sfxToggle.isOn ? GameSettingsManager.Instance.sfxVolume : 0f);
     }
 
     // Vídeo/Gráficos
@@ -91,13 +89,12 @@ public class SettingsMenu : MonoBehaviour
     }
     public void OnFullscreenChanged()
     {
-        print(fullscreenToggle.isOn);
         GameSettingsManager.Instance.fullscreen = fullscreenToggle.isOn;
         GameSettingsManager.Instance.SaveSettings();
         Screen.fullScreen = fullscreenToggle.isOn;
     }
 
-    // Jogabilidade
+    // Jogabilidade(Not implemented yet)
     public void OnLanguageChanged()
     {
         Debug.LogWarning("Language change functionality is not yet implemented.");
@@ -112,8 +109,9 @@ public class SettingsMenu : MonoBehaviour
         FindFirstObjectByType<CVDFilter>().ChangeProfile(colorBlindDropdown.value);
         GameSettingsManager.Instance.colorBlindMode = colorBlindDropdown.value;
         GameSettingsManager.Instance.SaveSettings();
-        // Ative/desative filtros de cor
     }
+    
+    //Populate Dropdowns
     void ResolutionDropdownPopulate()
     {
         if (resolutionDropdown != null)
@@ -139,8 +137,7 @@ public class SettingsMenu : MonoBehaviour
             resolutionDropdown.value = (savedIndex < options.Count) ? savedIndex : currentResIndex;
             resolutionDropdown.RefreshShownValue();
         }
-    }
-    
+    }  
     void ColorBlindDropdownPopulate()
     {
         if (colorBlindDropdown != null)

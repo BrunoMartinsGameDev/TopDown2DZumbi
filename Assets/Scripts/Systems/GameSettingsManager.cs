@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameSettingsManager : MonoBehaviour
 {
     public static GameSettingsManager Instance { get; private set; }
+
+    public AudioMixer audioMixer;
+
 
     public float masterVolume = 1f;
     public float musicVolume = 1f;

@@ -10,7 +10,7 @@ public class UiEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //Aumenta um pouco a escala do botão ao passar o mouse sobre ele de forma suave
         LeanTween.scale(gameObject, Vector3.one * 1.1f, 0.2f).setEase(LeanTweenType.easeOutBack);
         //Toca um som ao passar o mouse sobre o botão
-        AudioSource.PlayClipAtPoint(hoverSound, Camera.main.transform.position);
+        SoundsManager.Instance.PlaySFX(hoverSound, Camera.main.transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -24,7 +24,7 @@ public class UiEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //Aumenta um pouco a escala do botão ao passar o mouse sobre ele de forma suave
         LeanTween.scale(gameObject, Vector3.one * 1.1f, 0.2f).setEase(LeanTweenType.easeOutBack);
         //Toca um som ao passar o mouse sobre o botão
-        AudioSource.PlayClipAtPoint(hoverSound, Camera.main.transform.position);
+        SoundsManager.Instance.PlaySFX(hoverSound, Camera.main.transform.position);
     }
 
     public void OnDeselect(BaseEventData eventData)
@@ -35,7 +35,7 @@ public class UiEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         //Toca um som ao clicar no botão
-        AudioSource.PlayClipAtPoint(clickSound, Camera.main.transform.position);
+        SoundsManager.Instance.PlaySFX(clickSound, Camera.main.transform.position);
     }
 
 }
