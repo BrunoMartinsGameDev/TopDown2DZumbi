@@ -6,13 +6,9 @@ public class PlayerStats : MonoBehaviour
     public PlayerStatsData statsData;
     
     private float currentHealth;
-    private AudioSource audioSource;
     private bool isDead = false;
 
-    void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+
 
     void Start()
     {
@@ -32,7 +28,7 @@ public class PlayerStats : MonoBehaviour
         
         // Toca som de dano
         if (statsData != null && statsData.damageSound != null)
-            audioSource.PlayOneShot(statsData.damageSound);
+            SoundsManager.Instance.PlaySFX(statsData.damageSound, transform.position);
         
         // Atualiza UI
         UiManager.instance?.UpdateHealthUI(currentHealth, statsData.maxHealth);
@@ -59,7 +55,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-        audioSource.PlayOneShot(statsData != null && statsData.deathSound != null ? statsData.deathSound : null);
+        SoundsManager.Instance.PlaySFX(statsData != null && statsData.deathSound != null ? statsData.deathSound : null, transform.position);
         // Desativa movimento
         PlayerMovement movement = GetComponent<PlayerMovement>();
         if (movement != null)

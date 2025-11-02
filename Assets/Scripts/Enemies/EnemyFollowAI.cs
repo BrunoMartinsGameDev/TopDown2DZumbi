@@ -16,7 +16,6 @@ public class EnemyFollowAI : MonoBehaviour
     private Rigidbody2D rb2D;
     private Transform target;
     private EnemyStats enemyStats;
-    private PlayerStats playerStats;
     
     [Header("Pathfinding")]
     private List<Vector2> currentPath = new List<Vector2>();
@@ -49,7 +48,6 @@ public class EnemyFollowAI : MonoBehaviour
         if (player != null)
         {
             target = player.transform;
-            playerStats = player.GetComponent<PlayerStats>();
         }
     }
     

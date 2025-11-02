@@ -16,7 +16,6 @@ public class Weapon : MonoBehaviour
     private float nextFireTime = 0f;
     private bool isReloading = false;
     private PlayerMovement playerMovement;
-    private AudioSource audioSource;
 
     private WeaponData currentWeaponData;
 
@@ -29,7 +28,6 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         playerMovement = GetComponentInParent<PlayerMovement>();
         // Inicializa arrays de munição para cada arma
         magazines = new int[weaponData.Length];
@@ -71,7 +69,7 @@ public class Weapon : MonoBehaviour
         currentExtraMagazines = extraMagazines[currentWeaponIndex];
         UiManager.instance.UpdateWeaponUI(currentWeaponData);
         playerMovement.UpdateWeaponSprite(currentWeaponData);
-        audioSource.PlayOneShot(switchWeaponSound);
+        SoundsManager.Instance.PlaySFX(switchWeaponSound,transform.position);
     }
 
     void TryShoot()
@@ -105,7 +103,7 @@ public class Weapon : MonoBehaviour
         GameObject flash = Instantiate(muzzleFlashPrefab, firePoints[currentWeaponIndex].position, flashRotation, firePoints[currentWeaponIndex]);
 
         Destroy(flash, 0.1f); // Destroi o efeito de flash
-        audioSource.PlayOneShot(currentWeaponData.shootSound);
+        SoundsManager.Instance.PlaySFX(currentWeaponData.shootSound, transform.position);
         CameraFollow.Instance.Shake(currentWeaponData.recoilIntensity, 0.1f);
         UiManager.instance.UpdateWeaponUI(currentWeaponData);
     }
@@ -127,7 +125,7 @@ public class Weapon : MonoBehaviour
     {
         isReloading = true;
         loadingIcon.SetActive(true);
-        audioSource.PlayOneShot(currentWeaponData.reloadSound);
+        SoundsManager.Instance.PlaySFX(currentWeaponData.reloadSound, transform.position);
         yield return new WaitForSeconds(currentWeaponData.reloadTime);
         int bulletsToReload = magazineSize - currentMagazine;
         if (currentWeaponData.infiniteAmmo)
