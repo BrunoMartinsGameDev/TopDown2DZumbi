@@ -82,7 +82,7 @@ public class SettingsMenu : MonoBehaviour
         // Exemplo: aplicar resolução
         Resolution[] resolutions = Screen.resolutions;
         if (index >= 0 && index < resolutions.Length)
-        {
+        {   
             Resolution res = resolutions[index];
             Screen.SetResolution(res.width, res.height, GameSettingsManager.Instance.fullscreen);
         }
