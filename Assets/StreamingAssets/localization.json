@@ -1,0 +1,48 @@
+{
+    "playButton": {
+        "PT_BR": "Jogar",
+        "EN_US": "Play",
+        "ES_ES": "Jugar"
+    },
+    "settingsButton": {
+        "PT_BR": "Configurações",
+        "EN_US": "Settings",
+        "ES_ES": "Configuraciones"
+    },
+    "exitButton": {
+        "PT_BR": "Sair",
+        "EN_US": "Exit",
+        "ES_ES": "Salir"
+    },
+    "creditsButton": {
+        "PT_BR": "Créditos",
+        "EN_US": "Credits",
+        "ES_ES": "Créditos"
+    },
+    "masterVolume": {
+        "PT_BR": "Som Principal",
+        "EN_US": "Master Volume",
+        "ES_ES": "Volumen Principal"
+    },
+    "musicVolume": {
+        "PT_BR": "Música",
+        "EN_US": "Music Volume",
+        "ES_ES": "Volumen de Música"
+    },
+    "sfxVolume": {
+        "PT_BR": "Efeitos Sonoros",
+        "EN_US": "SFX Volume",
+        "ES_ES": "Volumen de Efectos"
+    },
+    "musicToggle": {
+        "PT_BR": "Música",
+        "EN_US": "Music",
+        "ES_ES": "Música"
+    },
+    "SFXToggle": {
+        "PT_BR": "Efeitos Sonoros",
+        "EN_US": "SFX",
+        "ES_ES": "Efectos"
+    }
+    
+}

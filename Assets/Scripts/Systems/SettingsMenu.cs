@@ -26,6 +26,7 @@ public class SettingsMenu : MonoBehaviour
     {
         ResolutionDropdownPopulate();
         ColorBlindDropdownPopulate();
+        LanguageDropdownPopulate();
         // Inicializa os controles com os valores salvos
         var gsm = GameSettingsManager.Instance;
         if (masterVolumeSlider != null) masterVolumeSlider.value = gsm.masterVolume;
@@ -82,7 +83,7 @@ public class SettingsMenu : MonoBehaviour
         // Exemplo: aplicar resolução
         Resolution[] resolutions = Screen.resolutions;
         if (index >= 0 && index < resolutions.Length)
-        {   
+        {
             Resolution res = resolutions[index];
             Screen.SetResolution(res.width, res.height, GameSettingsManager.Instance.fullscreen);
         }
@@ -97,10 +98,9 @@ public class SettingsMenu : MonoBehaviour
     // Jogabilidade(Not implemented yet)
     public void OnLanguageChanged()
     {
-        Debug.LogWarning("Language change functionality is not yet implemented.");
         GameSettingsManager.Instance.languageIndex = languageDropdown.value;
         GameSettingsManager.Instance.SaveSettings();
-        // Troque textos do jogo conforme idioma
+        LocalizationManager.Instance.SetLanguage((Language)languageDropdown.value);
     }
 
     // Acessibilidade
@@ -110,7 +110,7 @@ public class SettingsMenu : MonoBehaviour
         GameSettingsManager.Instance.colorBlindMode = colorBlindDropdown.value;
         GameSettingsManager.Instance.SaveSettings();
     }
-    
+
     //Populate Dropdowns
     void ResolutionDropdownPopulate()
     {
@@ -137,14 +137,14 @@ public class SettingsMenu : MonoBehaviour
             resolutionDropdown.value = (savedIndex < options.Count) ? savedIndex : currentResIndex;
             resolutionDropdown.RefreshShownValue();
         }
-    }  
+    }
     void ColorBlindDropdownPopulate()
     {
         if (colorBlindDropdown != null)
         {
             colorBlindDropdown.ClearOptions();
             var options = new System.Collections.Generic.List<string>();
-            foreach(var name in System.Enum.GetNames(typeof(VisionTypeNames)))
+            foreach (var name in System.Enum.GetNames(typeof(VisionTypeNames)))
             {
                 options.Add(name);
             }
@@ -152,6 +152,22 @@ public class SettingsMenu : MonoBehaviour
             int savedIndex = GameSettingsManager.Instance.colorBlindMode;
             colorBlindDropdown.value = (savedIndex < options.Count) ? savedIndex : 0;
             colorBlindDropdown.RefreshShownValue();
+        }
+    }
+    void LanguageDropdownPopulate()
+    {
+        if (languageDropdown != null)
+        {
+            languageDropdown.ClearOptions();
+            var options = new System.Collections.Generic.List<string>();
+            foreach (var name in System.Enum.GetNames(typeof(Language)))
+            {
+                options.Add(name);
+            }
+            languageDropdown.AddOptions(options);
+            int savedIndex = GameSettingsManager.Instance.languageIndex;
+            languageDropdown.value = (savedIndex < options.Count) ? savedIndex : 0;
+            languageDropdown.RefreshShownValue();
         }
     }
 }
