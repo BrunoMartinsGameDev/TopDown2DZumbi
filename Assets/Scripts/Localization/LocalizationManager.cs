@@ -9,6 +9,7 @@ public enum Language
 {
     EN_US,
     PT_BR,
+    ES_ES
 }
 
 public class LocalizationManager : MonoBehaviour
