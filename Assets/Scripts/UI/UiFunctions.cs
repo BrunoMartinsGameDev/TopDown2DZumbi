@@ -42,4 +42,16 @@ public class UiFunctions : MonoBehaviour
         if (ConfigsUI != null)
             ConfigsUI.SetActive(false);
     }
+
+    //Main Game UI functions
+    public void TryAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+    }
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+        Time.timeScale = 1f;
+    }
 }

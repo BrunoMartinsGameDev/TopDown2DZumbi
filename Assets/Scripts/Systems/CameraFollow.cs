@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -22,7 +23,24 @@ public class CameraFollow : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }   
+    }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            target = playerObj.transform;
+        }
+    }
 
     void LateUpdate()
     {

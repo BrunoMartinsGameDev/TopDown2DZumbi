@@ -30,6 +30,7 @@ public class SettingsMenu : MonoBehaviour
         LanguageDropdownPopulate();
 
         LocalizationManager.Instance.OnLanguageChanged += FullScreenDropdownPopulate;
+        
         // Inicializa os controles com os valores salvos
         var gsm = GameSettingsManager.Instance;
         if (masterVolumeSlider != null) masterVolumeSlider.value = gsm.masterVolume;

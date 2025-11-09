@@ -87,6 +87,7 @@ public class UiManager : MonoBehaviour
             healthSlider.value = currentHealth;
         }
     }
+   
     public void ShowDeathSprite(){
         if(deathSpriteUI != null && playerSpriteUI != null){
             deathSpriteUI.SetActive(true);
@@ -110,7 +111,8 @@ public class UiManager : MonoBehaviour
     {
         if (waveCompletedPanel != null && waveCompletedText != null)
         {
-            waveCompletedText.text = $"Wave {wave} Completada!\n+${reward}";
+            string template = LocalizationManager.Instance.GetLocalizedValue("waveCompleted");
+            waveCompletedText.text = string.Format(template, wave, reward);
             waveCompletedPanel.SetActive(true);
             Invoke(nameof(HideWaveCompleted), 3f);
         }
@@ -124,12 +126,14 @@ public class UiManager : MonoBehaviour
 
     public void ShowPurchaseSuccess(string itemName)
     {
-        ShowPurchaseMessage($"{itemName} comprado!", Color.green);
+        string template = LocalizationManager.Instance.GetLocalizedValue("purchaseSuccess");
+        ShowPurchaseMessage(string.Format(template, itemName), Color.green);
     }
 
     public void ShowPurchaseFailed(string reason)
     {
-        ShowPurchaseMessage(reason, Color.red);
+        string template = LocalizationManager.Instance.GetLocalizedValue("purchaseFailed");
+        ShowPurchaseMessage(string.Format(template, reason), Color.red);
     }
 
     void ShowPurchaseMessage(string message, Color color)
@@ -164,7 +168,10 @@ public class UiManager : MonoBehaviour
         while (remainingTime > 0)
         {
             if (nextWaveTimerText != null)
-                nextWaveTimerText.text = $"Próxima Wave em: {Mathf.CeilToInt(remainingTime)}s";
+            {
+                string template = LocalizationManager.Instance.GetLocalizedValue("nextWaveTimer");
+                nextWaveTimerText.text = string.Format(template, Mathf.CeilToInt(remainingTime));
+            }
             yield return new WaitForSeconds(1f);
             remainingTime -= 1f;
         }

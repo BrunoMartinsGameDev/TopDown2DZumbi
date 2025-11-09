@@ -20,11 +20,11 @@ public class ShopButton : MonoBehaviour
         if (priceText != null)
             priceText.text = $"${itemData.price}";
 
-        if (nameText != null)
-            nameText.text = itemData.itemName;
-
         if (iconImage != null && itemData.icon != null)
             iconImage.sprite = itemData.icon;
+
+        if( nameText != null)
+            nameText.text = LocalizationManager.Instance.GetLocalizedValue(itemData.itemType.ToString()+"Item");
     }
 
     public void OnBuyButtonClick()

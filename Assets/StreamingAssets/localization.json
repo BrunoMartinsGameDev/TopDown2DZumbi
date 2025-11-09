@@ -43,6 +43,51 @@
         "PT_BR": "Efeitos Sonoros",
         "EN_US": "SFX",
         "ES_ES": "Efectos"
+    },
+    "TryAgainButton": {
+        "PT_BR": "Tentar Novamente",
+        "EN_US": "Try Again",
+        "ES_ES": "Intentar de Nuevo"
+    },
+    "BackToMenuButton": {
+        "PT_BR": "Voltar ao Menu",
+        "EN_US": "Back to Menu",
+        "ES_ES": "Volver al Menú"
+    },
+    "waveCompleted": {
+        "PT_BR": "Wave {0} Completada!\n+${1}",
+        "EN_US": "Wave {0} Completed!\n+${1}",
+        "ES_ES": "¡Ola {0} Completada!\n+${1}"
+    },
+    "purchaseSuccess": {
+        "PT_BR": "{0} comprado!",
+        "EN_US": "{0} purchased!",
+        "ES_ES": "¡{0} comprado!"
+    },
+    "purchaseFailed": {
+        "PT_BR": "Compra falhou: {0}",
+        "EN_US": "Purchase failed: {0}",
+        "ES_ES": "Compra fallida: {0}"
+    },
+    "failedReasonInsufficientFunds": {
+        "PT_BR": "Dinheiro insuficiente",
+        "EN_US": "Insufficient funds",
+        "ES_ES": "Fondos insuficientes"
+    },
+    "nextWaveTimer": {
+        "PT_BR": "Próxima Wave em: {0}s",
+        "EN_US": "Next Wave in: {0}s",
+        "ES_ES": "Próxima Ola en: {0}s"
+    },
+    "RifleAmmoItem": {
+        "PT_BR": "Munição de Rifle",
+        "EN_US": "Rifle Ammo",
+        "ES_ES": "Munición de Rifle"
+    },
+    "HealthItem": {
+        "PT_BR": "Kit Médico",
+        "EN_US": "Med Kit",
+        "ES_ES": "Botiquín"
     }
     
 }

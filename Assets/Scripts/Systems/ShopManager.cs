@@ -32,17 +32,17 @@ public class ShopManager : MonoBehaviour
     public void BuyItem(ShopItemData item)
     {
         if (item == null || GameManager.Instance == null) return;
-        Debug.Log($"Buying item: {item.itemName} for ${item.price}");
+        Debug.Log($"Buying item: {item.itemType} for ${item.price}");
         if (GameManager.Instance.SpendMoney(item.price))
         {
             ApplyItemEffect(item);
-            UiManager.instance?.ShowPurchaseSuccess(item.itemName);
-            Debug.Log($"Item purchased: {item.itemName}");
+            UiManager.instance?.ShowPurchaseSuccess(LocalizationManager.Instance.GetLocalizedValue(item.itemType.ToString()+"Item"));
+            Debug.Log($"Item purchased: {item.itemType}");
         }
         else
         {
-            UiManager.instance?.ShowPurchaseFailed("Dinheiro insuficiente!");
-            Debug.Log($"Failed to purchase item: {item.itemName} - insufficient funds.");
+            UiManager.instance?.ShowPurchaseFailed(LocalizationManager.Instance.GetLocalizedValue("failedReasonInsufficientFunds"));
+            Debug.Log($"Failed to purchase item: {item.itemType} - insufficient funds.");
         }
     }
 
