@@ -10,15 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23c7f6d755649f049a33987309101ee8, type: 3}
-  m_Name: Wave01
+  m_Name: Wave00
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   initialSpawnInterval: 1
   spawnRateIncrement: 0.1
   maxActiveEnemies: 20
   enemies:
-  - statsData: {fileID: 11400000, guid: 4ceaef872f2d7764f91d8a53a262f5a5, type: 2}
-    enemyPrefab: {fileID: 2767087746708396365, guid: 0f6dba8b5f4177b4a8ac55ccc1fbd484, type: 3}
-    amount: 15
-  - statsData: {fileID: 11400000, guid: 37d8afb5021f6674e9afc6b344440fc3, type: 2}
-    enemyPrefab: {fileID: 2767087746708396365, guid: 211df39b3a7b0ca45925bb639d7b7d2e, type: 3}
-    amount: 10
+  - statsData: {fileID: 11400000, guid: fbcbd6b48aa288e44b34d64c1f4cb0f2, type: 2}
+    enemyPrefab: {fileID: 2767087746708396365, guid: 85031de6d21e15f4db645f7feeaaa24b, type: 3}
+    amount: 2

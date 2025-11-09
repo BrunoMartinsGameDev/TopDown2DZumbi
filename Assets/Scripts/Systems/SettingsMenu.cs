@@ -14,7 +14,7 @@ public class SettingsMenu : MonoBehaviour
 
     [Header("Vídeo/Gráficos")]
     public TMP_Dropdown resolutionDropdown;
-    public Toggle fullscreenToggle;
+    public TMP_Dropdown fullscreenDropdown;
 
     [Header("Jogabilidade")]
     public TMP_Dropdown languageDropdown;
@@ -25,8 +25,11 @@ public class SettingsMenu : MonoBehaviour
     private void Start()
     {
         ResolutionDropdownPopulate();
+        FullScreenDropdownPopulate();
         ColorBlindDropdownPopulate();
         LanguageDropdownPopulate();
+
+        LocalizationManager.Instance.OnLanguageChanged += FullScreenDropdownPopulate;
         // Inicializa os controles com os valores salvos
         var gsm = GameSettingsManager.Instance;
         if (masterVolumeSlider != null) masterVolumeSlider.value = gsm.masterVolume;
@@ -34,10 +37,15 @@ public class SettingsMenu : MonoBehaviour
         if (sfxVolumeSlider != null) sfxVolumeSlider.value = gsm.sfxVolume;
         if (musicToggle != null) musicToggle.isOn = gsm.musicEnabled;
         if (sfxToggle != null) sfxToggle.isOn = gsm.sfxEnabled;
-        if (fullscreenToggle != null) fullscreenToggle.isOn = gsm.fullscreen;
+        if (fullscreenDropdown != null) fullscreenDropdown.value = gsm.fullscreenMode;
         if (colorBlindDropdown != null) colorBlindDropdown.value = gsm.colorBlindMode;
         if (languageDropdown != null) languageDropdown.value = gsm.languageIndex;
         if (resolutionDropdown != null) resolutionDropdown.value = gsm.resolutionIndex;
+    }
+
+    void OnDestroy()
+    {
+        LocalizationManager.Instance.OnLanguageChanged -= FullScreenDropdownPopulate;
     }
 
     // Áudio
@@ -85,14 +93,28 @@ public class SettingsMenu : MonoBehaviour
         if (index >= 0 && index < resolutions.Length)
         {
             Resolution res = resolutions[index];
-            Screen.SetResolution(res.width, res.height, GameSettingsManager.Instance.fullscreen);
+            Screen.SetResolution(res.width, res.height, (FullScreenMode)GameSettingsManager.Instance.fullscreenMode);
         }
     }
     public void OnFullscreenChanged()
     {
-        GameSettingsManager.Instance.fullscreen = fullscreenToggle.isOn;
+        GameSettingsManager.Instance.fullscreenMode = fullscreenDropdown.value;
         GameSettingsManager.Instance.SaveSettings();
-        Screen.fullScreen = fullscreenToggle.isOn;
+        switch (fullscreenDropdown.value)
+        {
+            case 0: // Tela cheia tradicional
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                break;
+            case 1: // Tela cheia sem borda
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+            case 2: // Tela cheia maximizada
+                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+                break;
+            case 3: // Janela 
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                break;
+        }
     }
 
     // Jogabilidade(Not implemented yet)
@@ -136,6 +158,40 @@ public class SettingsMenu : MonoBehaviour
             int savedIndex = GameSettingsManager.Instance.resolutionIndex;
             resolutionDropdown.value = (savedIndex < options.Count) ? savedIndex : currentResIndex;
             resolutionDropdown.RefreshShownValue();
+        }
+    }
+    void FullScreenDropdownPopulate()
+    {
+        if (fullscreenDropdown != null)
+        {
+            fullscreenDropdown.ClearOptions();
+            var options = new System.Collections.Generic.List<string>();
+            switch (LocalizationManager.Instance.currentLanguage)
+            {
+                case Language.PT_BR:
+                    options.Add("Tela Cheia");
+                    options.Add("Sem Borda");
+                    options.Add("Maximizada");
+                    options.Add("Janela");
+                    break;
+                case Language.ES_ES:
+                    options.Add("Pantalla Completa");
+                    options.Add("Sin Bordes");
+                    options.Add("Maximizada");
+                    options.Add("Ventana");
+                    break;
+                default:
+                    options.Add("Fullscreen");
+                    options.Add("Borderless");
+                    options.Add("Maximized");
+                    options.Add("Windowed");
+                    break;
+            }
+
+            fullscreenDropdown.AddOptions(options);
+            int savedIndex = GameSettingsManager.Instance.fullscreenMode;
+            fullscreenDropdown.value = (savedIndex < options.Count) ? savedIndex : 0;
+            fullscreenDropdown.RefreshShownValue();
         }
     }
     void ColorBlindDropdownPopulate()

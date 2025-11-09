@@ -14,7 +14,7 @@ public class GameSettingsManager : MonoBehaviour
     public bool musicEnabled = true;
     public bool sfxEnabled = true;
     public int resolutionIndex = 0;
-    public bool fullscreen = true;
+    public int fullscreenMode = 0;
     public int languageIndex = 0;
     public int colorBlindMode = 0;
 
@@ -38,7 +38,7 @@ public class GameSettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("MusicEnabled", musicEnabled ? 1 : 0);
         PlayerPrefs.SetInt("SFXEnabled", sfxEnabled ? 1 : 0);
         PlayerPrefs.SetInt("ResolutionIndex", resolutionIndex);
-        PlayerPrefs.SetInt("Fullscreen", fullscreen ? 1 : 0);
+        PlayerPrefs.SetInt("FullscreenMode", fullscreenMode);
         PlayerPrefs.SetInt("LanguageIndex", languageIndex);
         PlayerPrefs.SetInt("ColorBlindMode", colorBlindMode);
         PlayerPrefs.Save();
@@ -52,7 +52,7 @@ public class GameSettingsManager : MonoBehaviour
         musicEnabled = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
         sfxEnabled = PlayerPrefs.GetInt("SFXEnabled", 1) == 1;
         resolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", 0);
-        fullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
+        fullscreenMode = PlayerPrefs.GetInt("FullscreenMode", 1);
         languageIndex = PlayerPrefs.GetInt("LanguageIndex", 0);
         colorBlindMode = PlayerPrefs.GetInt("ColorBlindMode", 0);
     }

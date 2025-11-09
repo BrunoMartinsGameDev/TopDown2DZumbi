@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23c7f6d755649f049a33987309101ee8, type: 3}
-  m_Name: Wave01
+  m_Name: Wave02
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   initialSpawnInterval: 1
   spawnRateIncrement: 0.1
@@ -21,4 +21,4 @@ MonoBehaviour:
     amount: 15
   - statsData: {fileID: 11400000, guid: 37d8afb5021f6674e9afc6b344440fc3, type: 2}
     enemyPrefab: {fileID: 2767087746708396365, guid: 211df39b3a7b0ca45925bb639d7b7d2e, type: 3}
-    amount: 10
+    amount: 15

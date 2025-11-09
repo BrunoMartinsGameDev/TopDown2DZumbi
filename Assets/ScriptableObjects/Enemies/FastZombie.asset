@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc7c352ed43cf2e4a87cd25b45ebd7d3, type: 3}
+  m_Name: FastZombie
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatsData
+  maxHealth: 8
+  moveSpeed: 8
+  damage: 2
+  coinDrop: 1
+  deathSprite: {fileID: 21300000, guid: b2a2d271554ad4b48ac32a73b51ba6a4, type: 3}
