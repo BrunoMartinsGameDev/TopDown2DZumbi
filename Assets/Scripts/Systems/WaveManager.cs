@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
     private int[] enemiesToSpawn;
     private float currentSpawnInterval;
     private bool allEnemiesSpawned = false;
-    private bool firstWaveStarted = false;
+    // private bool firstWaveStarted = false;
 
     void Awake()
     {
@@ -33,6 +33,7 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 0f;
         SetWave(currentLevel);
     }
 
@@ -62,15 +63,15 @@ public class WaveManager : MonoBehaviour
     }
 
     //SERA REMOVIDO DEPOIS
-    void Update()
-    {
-        // Só permite iniciar manualmente a primeira wave
-        if(!firstWaveStarted && Input.GetKeyDown(KeyCode.E))
-        {
-            firstWaveStarted = true;
-            StartSpawnLoop();
-        }
-    }
+    // void Update()
+    // {
+    //     // Só permite iniciar manualmente a primeira wave
+    //     if(!firstWaveStarted && Input.GetKeyDown(KeyCode.E))
+    //     {
+    //         firstWaveStarted = true;
+    //         StartSpawnLoop();
+    //     }
+    // }
 
     public void OnEnemyDeath()
     {
@@ -99,6 +100,7 @@ public class WaveManager : MonoBehaviour
     // Inicia o loop de spawn
     public void StartSpawnLoop()
     {
+        Time.timeScale = 1f;
         spawnLoopCoroutine ??= StartCoroutine(SpawnLoop());
     }
 

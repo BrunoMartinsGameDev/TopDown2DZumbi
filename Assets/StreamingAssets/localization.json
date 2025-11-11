@@ -88,6 +88,36 @@
         "PT_BR": "Kit Médico",
         "EN_US": "Med Kit",
         "ES_ES": "Botiquín"
+    },
+    "MoveTutorial": {
+        "PT_BR": "Andar",
+        "EN_US": "Move",
+        "ES_ES": "Mover"
+    },
+    "ReloadTutorial": {
+        "PT_BR": "Recarregar",
+        "EN_US": "Reload",
+        "ES_ES": "Recargar"
+    },
+    "ShootTutorial": {
+        "PT_BR": "Atirar",
+        "EN_US": "Shoot",
+        "ES_ES": "Disparar"
+    },
+    "InteractTutorial": {
+        "PT_BR": "Interagir",
+        "EN_US": "Interact",
+        "ES_ES": "Interactuar"
+    },
+    "AimTutorial": {
+        "PT_BR": "Mirar",
+        "EN_US": "Aim",
+        "ES_ES": "Apuntar"
+    },
+    "ChangeWeaponTutorial": {
+        "PT_BR": "Trocar Arma",
+        "EN_US": "Change Weapon",
+        "ES_ES": "Cambiar Arma"
     }
     
 }
