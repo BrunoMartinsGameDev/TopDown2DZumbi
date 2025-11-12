@@ -1,3 +1,4 @@
+using SOG.CVDFilter;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -6,6 +7,7 @@ public class GameSettingsManager : MonoBehaviour
     public static GameSettingsManager Instance { get; private set; }
 
     public AudioMixer audioMixer;
+    public CVDProfilesSO cvdProfiles;
 
 
     public float masterVolume = 1f;
@@ -17,6 +19,7 @@ public class GameSettingsManager : MonoBehaviour
     public int fullscreenMode = 0;
     public int languageIndex = 0;
     public int colorBlindMode = 0;
+    
 
     void Awake()
     {

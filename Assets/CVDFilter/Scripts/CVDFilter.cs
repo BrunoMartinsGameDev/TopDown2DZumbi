@@ -36,6 +36,7 @@ namespace SOG.CVDFilter
         void Setup()
         {
             AssignProfileSO();
+            profiles = GameSettingsManager.Instance.cvdProfiles;
             ConfigureVolume();
         }
 

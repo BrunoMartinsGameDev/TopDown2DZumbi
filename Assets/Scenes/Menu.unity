@@ -4902,6 +4902,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114466795492284082, guid: cbc9cc4306c5e354696618b95ff4388d, type: 3}
+      propertyPath: currentType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925544536286692946, guid: cbc9cc4306c5e354696618b95ff4388d, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: cea8ab61c6d1cec4fbcd4d98bd15733c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10666,6 +10674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameSettingsManager
       objectReference: {fileID: 0}
+    - target: {fileID: 727118046517575589, guid: 2ba8e2125f5bd6d4d92f89b50f01579c, type: 3}
+      propertyPath: cvdProfiles
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e19d6e1252e29147be830dcaa63abf0, type: 2}
     - target: {fileID: 2621338978484546771, guid: 2ba8e2125f5bd6d4d92f89b50f01579c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

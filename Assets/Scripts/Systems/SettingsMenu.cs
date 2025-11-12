@@ -129,7 +129,9 @@ public class SettingsMenu : MonoBehaviour
     // Acessibilidade
     public void OnColorBlindModeChanged()
     {
-        FindFirstObjectByType<CVDFilter>().ChangeProfile(colorBlindDropdown.value);
+        // FindFirstObjectByType<CVDFilter>().ChangeProfile(colorBlindDropdown.value);
+        CVDFilter filter = FindFirstObjectByType<CVDFilter>();
+        filter.ChangeProfile(colorBlindDropdown.value);        
         GameSettingsManager.Instance.colorBlindMode = colorBlindDropdown.value;
         GameSettingsManager.Instance.SaveSettings();
     }
